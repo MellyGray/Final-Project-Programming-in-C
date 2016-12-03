@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define FILTERING
+
+#ifdef 	FILTERING
+/*--------------------------------------------------------------------------------------------*/
+
 /*Header to define functions*/
 
 void MainMenu();
@@ -31,8 +36,17 @@ The main purpose is to show a list of the available DVD movies
 
 void ShowOnlineMoviesRentByClient();
 /*
-After introducing the clientâ€™s name, the application shows a list of the movies that have been rented by him/her.*/
+After introducing the client’s name, the application shows a list of the movies that have been rented by him/her.*/
 
 void EXIT();
 
 /*End the execution of the program*/
+
+void filtering(int act, int mue, int step);
+
+/*	Show the value of a variable given, ejecution step to step and activation or desactivation.
+*/
+
+/*--------------------------------------------------------------------------------------------*/
+
+#endif FILTERING

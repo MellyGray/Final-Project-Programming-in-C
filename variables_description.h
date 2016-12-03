@@ -5,9 +5,14 @@
 
 #ifdef FILTERING
 /*--------------------------------------------------------------------------------------------*/
-/*Header to define macros, constants*/
+/*Header to describe each variable*/
 
-#define FILTERING //Filtering activated
+/* From the filtering function
+act= activation
+mue = variable shown
+step =ejecution step to step*/
 /*--------------------------------------------------------------------------------------------*/
 
 #endif FILTERING
+
+
