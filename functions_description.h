@@ -8,6 +8,16 @@
 
 /*Header to define functions*/
 
+void ReadClientsFile();
+    
+/*Function to read clients file*/
+
+
+void SaveClients();
+
+/*
+Function to save users info ( Name, ID and Birhday)*/
+
 void MainMenu();
 /*
 The main menu of the programm, it should stard with the execution on the app.*/
