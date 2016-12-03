@@ -20,8 +20,10 @@ day and there is not maximum limit of days).*/
 
 #include "functions_description.h"
 #include "macros.h"
-#include "structs_descrit.h"
 
 void main (){
+	MainMenu();
+	
+	
 	
 }
