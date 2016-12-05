@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define FILTERING
 
-#ifdef 	FILTERING
+
+//#define FILTERING
+
+//#ifdef 	FILTERING
 /*--------------------------------------------------------------------------------------------*/
 
 /*Header to define functions*/
@@ -12,10 +14,9 @@ void Introduction();
 
 /* Initial function tha allows to choose between registering or logging.*/
 
-void ReadClientsFile();
-    
-/*Function to read clients file*/
+void logging();
 
+/*Function to log in*/
 
 void SaveClients();
 
@@ -63,4 +64,4 @@ void filtering(int act, int mue, int step);
 
 /*--------------------------------------------------------------------------------------------*/
 
-#endif FILTERING
+//#endif FILTERING

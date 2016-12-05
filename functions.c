@@ -4,14 +4,15 @@
 #include "functions.h"
 #include "structs_descript.h"
 
-#define FILTERING
+static int nClients=10;
+//#define FILTERING
 
-#ifdef FILTERING
+//#ifdef FILTERING
 
 /*---------------------------FUNCTIONS DEFINITON------------------------------------*/
 
 /*Function to filter errors*/
-
+/*
 void filtering(int act, int mue, int step){
 	char c; //Entry to continiue
 	if (act == TRUE){
@@ -20,7 +21,7 @@ void filtering(int act, int mue, int step){
 		scanf("%c",&c);
 	} //End if
 }
-
+/*
 /*End of the filtering function*/
 
 /*Funtion introduction*/
@@ -39,7 +40,7 @@ void Introduction(){
 		   SaveClients();
 		    break;
 		case 2: //Calling the function to loggin.
-		  // logging();
+		  logging();
 		    break;
 		default: 
 		    puts("Invalid option, select a correct one.");  
@@ -50,47 +51,72 @@ void Introduction(){
 }
 /*End of the introduction function*/
 
-/*Funtion to read the clients on the file input.txt*/
-void ReadClientsFile(){
-	int nClients; //Max number of clients on the file
+/*Funtion to log in*/
+
+void logging(){
+	int location;
+	int found;
+	int narray;
+	int enter;
 	int i; //Position of the client in the array Clients[]	
+	int j;
 	//Declare file variable
 	FILE *fi;
 	// Open file
 	fi = fopen("input.txt", "r"); //In input.txt we save all the clients information
-    	
-    // Read file
-	fscanf (fi, "%i", &nClients); //Read the maximum number of clients
 
 	struct Client Clients[nClients]; //Struct of the array Clients[]
    
 	/* Read clients information from the file */
     for (i=0; i<nClients; i++) {
-        fscanf(fi, "%i", &Clients[i].id);
-        fscanf(fi, "%s", Clients[i].name);
+        fscanf(fi, "%s",Clients[i].name);
         fscanf(fi, "%i", &Clients[i].Birthdate.day);
         fscanf(fi, "%i", &Clients[i].Birthdate.month);
         fscanf(fi, "%i", &Clients[i].Birthdate.year);
+	}   
+	puts("-------------------------Log in your account--------------------------------");
+	struct Logging user;
+	puts("Enter your name");   // Logging
+	scanf("%s",user.name);
+	found=0;
+	i=0; //The last valid value of i
+	enter=0;
+	while((found==0) && (i<nClients)){
+		if (strcmp(user.name,Clients[i].name) == 0){
+		    found=1;  //Searching if it is in the file
+		    enter=1;		     
+		}else{
+			i++;
+		}
+}
+	if(enter==1){
+		MainMenu();
+	}else if(enter==0){
+			puts("Your name is not registred yet, please register now.");
+		SaveClients();
 	}
-	    
 	// close file
 	fclose(fi);
+	  puts("------------------------------------------------------------------------------------------------------");
 }
 
-/* End of the function of readind clients from the input file*/
+/* End of the function to log in*/
 
-/* End of the function of readind clients from the input file*/
+/*Function to save the data of a new client*/
 
 void SaveClients(){                                                        
 	struct Client user;
-    ReadClientsFile();
 	FILE *fi;      //Declare file variable
 	fi=fopen("input.txt","a");
     /* Ask for date and print contact names */
-   puts("Join Movies Club Agency.");
-   printf("Complete name(After introducing the name, please press Tab):");                      //ASIGNAR VALOR A LA ID
-   scanf("%[^\t]", user.name);
-   printf("Birthday:");                          //PONER FILTRO DE EDAD Y QUE COINCIDADN LAS FECHAS CON VALORES LOGICOS.
+    puts("");
+   puts("---------------------------Join Movies Club Agency.-------------------------------------------");
+     puts("");
+   printf("Complete name:");                      //ASIGNAR VALOR A LA ID
+   scanf("%s", user.name);
+     puts("");
+   puts("First introduce your birthday:"); 
+     puts("");                         //PONER FILTRO DE EDAD Y QUE COINCIDADN LAS FECHAS CON VALORES LOGICOS.
    printf("Day:");
    scanf("%i", &user.Birthdate.day);
      printf("Month:");
@@ -99,42 +125,47 @@ void SaveClients(){
    scanf("%i", &user.Birthdate.year);
    fprintf (fi, "\n %s %i %i %i", user.name, user.Birthdate.day, user.Birthdate.month, user.Birthdate.year);
    fclose(fi);
+   puts("");
+   puts("Register completed successfuly.!!!");
+   puts("");
+   nClients++;
+   logging();
 	
 }
 
-/*End of the funtion Clients()*/
+/*End of the funtion to save data of a new client*/
 
 /*Function MainMenu() */
 
 void MainMenu(){
 	int menu;
 	/*Print the Main Menu*/
-	printf("Main Menu/n 1 – Watch an online movie /n 2 – Show online rentals /n 3 – Rent a DVD movie /n 4 – Show DVD rentals /n5 – Show DVD availability /n 6 – Show online movies rented by a client /n 7 – Exit /n Please, select an option (1-7):");
+	printf("-----------------------Main Menu------------------------\n \n 1  Watch an online movie \n 2  Show online rentals \n 3  Rent a DVD movie \n 4  Show DVD rentals \n 5  Show DVD availability \n 6  Show online movies rented by a client \n 7  Exit \n  \n");
 	/* Select an option*/
 	do{
 	puts("Select one option (Type a number from 1 to 7)");
 	scanf("%i", &menu);
 	switch(menu){
 		case 1: //Call the funcition WatchOnlineMovies()
-		   WatchOnlineMovies();
+		   //WatchOnlineMovies();
 		   break;
 		case 2://Call the function ShowOnlineRentals();
-		   ShowOnlineRentals();
+		   //ShowOnlineRentals();
 		   break;
 		case 3://Call the function RentaDVDMovie();
-		   RentaDVDMovie();
+		   //RentaDVDMovie();
 		   break;
 		case 4://Call the function ShowDVDRentals();
-		   ShowDVDRentals();
+		   //ShowDVDRentals();
 		   break;
 		case 5://Call the function ShowDVDAvailability();
-		   ShowDVDAvailability();
+		   //ShowDVDAvailability();
 		   break;
 		case 6://Call the function ShowOnlineMoviesRentByClient();
-		   ShowOnlineMoviesRentByClient();
+		  // ShowOnlineMoviesRentByClient();
 		   break;
 		case 7://Call the function EXIT();
-		   EXIT();
+		   //EXIT();
 		   break;
 		default: puts("The option does not exists. Please, select a valid option.");
 			
@@ -144,4 +175,4 @@ void MainMenu(){
 
 /* End of the MainMenu() function*/
 
-#endif FILTERING
+//#endif FILTERING

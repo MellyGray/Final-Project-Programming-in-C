@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define FILTERING
+//#define FILTERING
 
-#ifdef FILTERING
+//#ifdef FILTERING
 /*--------------------------------------------------------------------------------------------*/
 /*Header to describe each variable*/
 
@@ -13,6 +13,6 @@ mue = variable shown
 step =ejecution step to step*/
 /*--------------------------------------------------------------------------------------------*/
 
-#endif FILTERING
+//#endif FILTERING
 
 

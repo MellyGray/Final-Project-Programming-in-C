@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define FILTERING
+//#define FILTERING
 
-#ifdef FILTERING
+//#ifdef FILTERING
 /*--------------------------------------------------------------------------------------------*/
 /*Header to define macros, constants*/
 
-#define FILTERING //Filtering activated
+//#define FILTERING //Filtering activated
 /*--------------------------------------------------------------------------------------------*/
 
-#endif FILTERING
+//#endif FILTERING

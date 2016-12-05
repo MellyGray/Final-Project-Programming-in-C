@@ -18,12 +18,11 @@ day and there is not maximum limit of days).*/
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "functions_description.h"
+#include "functions.h"
 #include "macros.h"
 
+
 void main (){
-	MainMenu();
-	
-	
-	
+	Introduction();
+		
 }
