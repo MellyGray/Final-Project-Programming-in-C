@@ -1,10 +1,10 @@
-starwarsI
-harrypotter1
-harrypotter2
-harrypotter3
-harrypotter4
-harrypotter5
-harrypotter6
-harrypotter7.1
-harrypotter7.2
+star wars I
+harry potter 1
+harry potter 2
+harry potter 3
+harry potter 4
+harry potter 5
+harry potter 6
+harry potter 7.1
+harry potter 7.2
 Locke

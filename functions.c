@@ -58,7 +58,7 @@ void logging(){
    
 	/* Read clients information from the file */
     for (i=0; i<nClients; i++) {
-        fscanf(fi, "%s",Clients[i].name);
+        fscanf(fi, " %[^\t]s",Clients[i].name);
         fscanf(fi, "%i", &Clients[i].Birthdate.day);
         fscanf(fi, "%i", &Clients[i].Birthdate.month);
         fscanf(fi, "%i", &Clients[i].Birthdate.year);
@@ -67,7 +67,7 @@ void logging(){
 	struct Logging user;
 	puts("");
 	puts("Enter your name");   // Logging
-	scanf("%s",user.name);
+	scanf(" %[^\n]s",user.name);
 	found=0;
 	i=0; //The last valid value of i
 	enter=0;
@@ -104,7 +104,7 @@ void SaveClients(){
    puts("---------------------------Join Movies Club Agency.-------------------------------------------");
      puts("");
    printf("Complete name:");                      //ASIGNAR VALOR A LA ID
-   scanf("%s", user.name);
+   scanf(" %[^\n]s", user.name);
      puts("");
    puts("First introduce your birthday:"); 
      puts("");                         //PONER FILTRO DE EDAD Y QUE COINCIDADN LAS FECHAS CON VALORES LOGICOS.
@@ -138,13 +138,13 @@ void WatchOnlineMovies(){
 	struct Movies Price[NUMBER_OF_MOVIES];
 	/* Read movies titles information from the file */
 	    for (i=0; i<NUMBER_OF_MOVIES; i++) {
-        fscanf(mT, "%s",Title[i].Title);
+        fscanf(mT, " %[^\n]s",Title[i].Title);
 	}   
 	fclose(mT);
 	puts("---------------------------WATCH ONLINE MOVIES------------------------------------");
 	puts("");
 	puts("Search for a movie. Introduce the name:");
-	scanf("%s",Search.Title);
+	scanf(" %[^\n]s",Search.Title);
 	puts("");
 	found=0;
 	enter=0;
