@@ -1,13 +1,10 @@
-Melina 10 2 1995
-Ahri 30 6 1990
-Katarina 14 5 1998
-Pedro 20 7 1980
-Vladimir 7 8 1120
-Madison 2 3 1986
-Bob 30 8 1000
-Lauren 18 7 1988
-Julio 3 8 1969
-Iñarrea 34 12 1970
- 
-Pepito 10 2 1998
- Pepito 20 2 1998
+Melina Abril	10 2 1995
+Ahri Buenorra	30 6 1990
+Katarina Noxus	14 5 1998
+Pedro Tradacete	20 7 1980
+Vladimir Putin	7 8 1120
+Madison Ivy	2 3 1986
+Bob Esponja	30 8 1000
+Lauren Drain	18 7 1988
+Julio Moro	3 8 1969
+Inyarrea Ptoamo	34 12 1970
