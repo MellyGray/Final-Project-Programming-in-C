@@ -15,10 +15,12 @@ static int nClients=10;
 void Introduction(){
 	int intro;
 	puts("-------------------Welcome to Movies Club Agency------------------------");
+	puts("");
 	puts(" Do you want to create a new account or to logging?");
 	puts("(1) REGISTER");
 	puts("(2) LOG IN");
 	do{
+		puts("");
 		puts("\n Select one option:");
 	scanf("%i", &intro);
 	switch(intro){
@@ -29,6 +31,7 @@ void Introduction(){
 		  logging();
 		    break;
 		default: 
+		puts("");
 		    puts("Invalid option, select a correct one.");  
 	}//Final of the switch:
 	}while( intro!=1 && intro!=2);
@@ -62,6 +65,7 @@ void logging(){
 	}   
 	puts("-------------------------Log in your account--------------------------------");
 	struct Logging user;
+	puts("");
 	puts("Enter your name");   // Logging
 	scanf("%s",user.name);
 	found=0;
@@ -78,6 +82,7 @@ void logging(){
 	if(enter==1){
 		MainMenu();
 	}else if(enter==0){
+		puts("");
 			puts("Your name is not registred yet, please register now.");
 		SaveClients();
 	}
@@ -138,8 +143,9 @@ void WatchOnlineMovies(){
 	fclose(mT);
 	puts("---------------------------WATCH ONLINE MOVIES------------------------------------");
 	puts("");
-	puts("Search for a movie. Introduce the name:(Press tab after writting the name)");
+	puts("Search for a movie. Introduce the name:");
 	scanf("%s",Search.Title);
+	puts("");
 	found=0;
 	enter=0;
 	i=0;
@@ -163,23 +169,32 @@ if (enter == 1){
     }
     fclose(mp);
 	printf("The total price for %s movie is: %i €.\n",Search.Title,price);
+	puts("");
 	puts("PURCHASE");
 	puts("(1) YES");
 	puts("(2) NO");
+	puts("");
     scanf("%i",&answer);
     if(answer == 1){
+    	puts("");
     puts("You have already log in with your account.");
+    puts("");
     puts("Add a credit card.");
+    puts("");
     puts("Introduce card number:");
     scanf("%12.i",&cardnumber);
+    puts("");
     puts("Introduce expiration date (d m y):");
     scanf("%i %i %i",&day,&month,&year);
-    printf("Great! Successful payment. Now you can watch %s for 24h. Enjoy!",Search.Title);
+    puts("");
+    printf("Great! Successful payment. Now you can watch %s for 24h. Enjoy!\n",Search.Title);
     puts("------------------------------------------------------------------------------------------------------");
     }
     else if(answer == 2){
     	puts("-------------------------------------------------------------------------------");
+    	puts("");
     	printf(" 1 - Search for another movie \n 2 - Go back to Main Menu \n");
+    	puts("");
     	puts("Select one option (1 or 2):");
     	scanf("%i",&answer2);
     	if (answer2 == 1)
@@ -190,7 +205,9 @@ if (enter == 1){
     
     
 }else if(enter == 0){
+	puts("");
 	puts("The movie does not exist. Please, search again.");
+	puts("");
 	puts("-------------------------------------------------------------------------------");
 	WatchOnlineMovies();
 }	
