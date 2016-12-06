@@ -1,18 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-//#define FILTERING
-
-//#ifdef 	FILTERING
-/*--------------------------------------------------------------------------------------------*/
-
-/*Header to define functions*/
+/*-------------------------------------------FUNCTIONS DECLARATION-------------------------------------------------*/
 
 void Introduction();
 
-/* Initial function tha allows to choose between registering or logging.*/
+/* Initial function tha allows to choose between register or logging.*/
 
 void logging();
 
@@ -21,21 +14,24 @@ void logging();
 void SaveClients();
 
 /*
-Function to save users info ( Name, ID and Birhday)*/
+Function to save users info ( Complete name, ID and Birhday)*/
 
 void MainMenu();
-/*
-The main menu of the programm, it should stard with the execution on the app.*/
 
-void ShowOnlineRentals();
-/* 
-First option of the main menu, it allows the user to rent an online movie*/
+/*
+The main menu of the application.*/
 
 void WatchOnlineMovies();
+
+/* 
+First option of the main menu, it allows the user to rent an online movie.*/
+
+void ShowOnlineRentals();
 /*
 Second option of the main menu, it shows a list of the online rentals of a movie in the current month*/
 
 void RentaDVDMovie();
+
 /*
 Given a movie title and a period of time (start and end dates), 
 the application should find the availability of the required movie in the indicated period */
@@ -49,7 +45,7 @@ void ShowDVDAvailability();
 The main purpose is to show a list of the available DVD movies 
 (DVDs which are not rented for a specific period of time) in the agency.*/
 
-void ShowOnlineMoviesRentByClient();
+void ShowOnlineMoviesRentedByClient();
 /*
 After introducing the client’s name, the application shows a list of the movies that have been rented by him/her.*/
 
@@ -57,11 +53,4 @@ void EXIT();
 
 /*End the execution of the program*/
 
-void filtering(int act, int mue, int step);
-
-/*	Show the value of a variable given, ejecution step to step and activation or desactivation.
-*/
-
 /*--------------------------------------------------------------------------------------------*/
-
-//#endif FILTERING

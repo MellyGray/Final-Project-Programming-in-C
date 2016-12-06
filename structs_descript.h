@@ -1,30 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#define FILTERING
+/*--------------------------------------LIBRARY FOR STRUCTURES------------------------------------------------------*/
 
-//#ifdef 	FILTERING
-/*--------------------------------------BLOCK FOR STRUCTURES------------------------------------------------------*/
+//Structure for a Date
 struct Date {
     int day;
     int month;
     int year;
 };
 
+//Structure for the Client information
 struct Client {
-	int id;       // To make the ID, make a loop that sum 1 number to 00000000
+	char id[8];       
     char name[100];
     struct Date Birthdate;
 };
 
-struct Logging {    //ATENDER SIEMPRE A LA LOCALIDAD DE LAS VARIABLES,
-	char name[100]; //No vaya a ser que una variable que pensemo que es local no lo es
-};
+//Structure for an actor information
 struct info {
 	char name[100];
 	struct Date Birthdate;
 	char nationality[50];
 };
+
+//Structure for movies info.
 struct Movies {
 	char Title[100];
 	char Genre[100];
@@ -36,4 +36,3 @@ struct Movies {
 };
 
 /*----------------------------------------------------------------------------------------------------------------*/
-//#endif FILTERING

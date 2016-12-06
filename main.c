@@ -18,11 +18,9 @@ day and there is not maximum limit of days).*/
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "functions.h"
-#include "macros.h"
-
+#include "functions.h" //Library with the functions
 
 void main (){
-	Introduction();
+	Introduction(); //Function to log in or register. It directs to EXIT() or MainMenu().
 		
 }
