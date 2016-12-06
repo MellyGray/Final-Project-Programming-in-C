@@ -81,7 +81,7 @@ void SaveClients(){
 void MainMenu(){
 	int menu;
 	/*Print the Main Menu*/
-	printf("Main Menu/n 1 – Watch an online movie /n 2 – Show online rentals /n 3 – Rent a DVD movie /n 4 – Show DVD rentals /n5 – Show DVD availability /n 6 – Show online movies rented by a client /n 7 – Exit /n Please, select an option (1-7):");
+	printf("Main Menu/n 1 â€“ Watch an online movie /n 2 â€“ Show online rentals /n 3 â€“ Rent a DVD movie /n 4 â€“ Show DVD rentals /n5 â€“ Show DVD availability /n 6 â€“ Show online movies rented by a client /n 7 â€“ Exit /n Please, select an option (1-7):");
 	/* Select an option*/
 	do{
 	puts("Select one option (Type a number from 1 to 7)");
@@ -116,4 +116,194 @@ void MainMenu(){
 
 /* End of the MainMenu() function*/
 
+// Start of function 2
+void ShowOnlineRentals(){
+	char title[256];
+	FILE *fi;
+    int i;
+	struct Film Online[i];
+	int e;
+	int enter;
+	int t;
+	t=-1;
+	do{
+	puts("Introduce the title of the film");
+	char title[256];
+	scanf(" %[^\n]", title);
+	enter=0;
+	i=0;
+	if(strcmp(title,"star wars 1")==0){
+		fi=fopen("star wars 1O.txt","r");
+		do{
+	    e=fscanf(fi," %[^\n]", &Online[i].name);
+		printf("%s", Online[i].name);
+		e=fscanf(fi,"%i", &Online[i].date.day);
+		printf("%i", Online[i].date.month);
+		if(e!=t){
+			i++;
+		}	    //Vamos a hacer dos archivos, uno con nombres y otro con una estrutura file              //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 1")==0){
+		fi=fopen("harry potter 1.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;    //Vamos a hacer dos archivos,            //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 2")==0){
+		fi=fopen("harry potter 2.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;    //Vamos a hacer dos archivos,               //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 3")==0){
+		fi=fopen("harry potter 3.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;    //Vamos a hacer dos archivos,          //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 4")==0){
+		fi=fopen("harry potter 4.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,dos archivos, uno con nombres y otro con una estrutura file
+			               //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 5")==0){
+		fi=fopen("harry potter 5.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,              //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 6")==0){
+		fi=fopen("harry potter 6.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,           //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry potter 7.1")==0){
+		fi=fopen("harry potter 7.1.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,              //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"harry poter 7.2")==0){
+		fi=fopen("harry poter 7.2.txt","r");
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,             //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else if(strcmp(title,"Locke")==0){
+		do{
+			e=fscanf(fi,"%[^\t]", Online[i].name);
+			printf("%s", Online[i].name);
+			e=fscanf(fi,"%i", &Online[i].date.day);
+			printf("%i", Online[i].date.day);
+			e=fscanf(fi,"%i", &Online[i].date.month);
+			printf("%i", Online[i].date.month);
+			e=fscanf(fi,"%i", &Online[i].date.year);
+			printf("%i", Online[i].date.year);
+			e=fscanf(fi,"%[^\n]", &Online[i].prize);
+			printf("%i", Online[i].prize);
+			puts("");
+			i++;     //Vamos a hacer dos archivos,      //de data y file
+		}while(e!=t);
+		fclose(fi);
+	}else{
+		puts("Please choose a correct option");
+		enter=1;
+	}
+}while(enter==1);
+}
+
 #endif FILTERING
+
+//End of  function 2
