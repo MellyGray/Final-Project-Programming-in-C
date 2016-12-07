@@ -8,6 +8,7 @@
 
 static int nClients=10; //Number of registered clients
  
+
 /*-------------------------------------------------FUNCTIONS DEFINITION------------------------------------*/
 
 /*Start of the Funtion introduction*/
@@ -189,7 +190,7 @@ void MainMenu(){
 		   //ShowDVDAvailability();
 		   break;
 		case 6://Call the function ShowOnlineMoviesRentByClient();
-		  // ShowOnlineMoviesRentByClient();
+		  ShowOnlineMoviesRentedByClient();
 		   break;
 		case 7://Call the function exit();
 		   exit(EXIT_SUCCESS);
@@ -205,6 +206,7 @@ void MainMenu(){
 /*Function to watch online movies*/
 
 void WatchOnlineMovies(){
+	char completename[100];
 	int found,enter,i,j,cardnumber,answer,price,day,month,year;
 	int location; //Variable for the position of the movie in the text file in order to find its price.
 	struct Date Initial;
@@ -253,15 +255,18 @@ if (enter == 1){
     scanf("%i",&answer);
     if(answer == 1){
     	puts("");
-    puts("You have already log in with your account.");
+     puts("Please, introduce complete name:");
+	scanf(" %[^\n]s",completename);
     puts("");
+    printf("Please, introduce the date (dd mm yyyy)\n");
+    scanf("%i %i %i",&Initial.day,&Initial.month,&Initial.year);
     puts("Now add a credit card.");
     puts("");
    puts("Introduce card number:");
-    scanf("%12i",&cardnumber);
+    scanf("%i",&cardnumber);
     puts("");
     puts("Introduce expiration date (mm yyyy):");
-    scanf("%02i %4i",&month,&year);
+    scanf("%i %i",&month,&year);
     puts("");
     printf("Great! Successful payment. Now you can watch %s for 24h. Enjoy! \n",Search[i].Title);
     puts("");
@@ -273,6 +278,10 @@ if (enter == 1){
     puts("");
     puts("------------------------------------------------------------------------------------------------------");
     puts("");
+    FILE *online;
+    online=fopen("onlinerent.txt","a");
+    fprintf(online,"\n%s\t%s\t%02i %02i %4i %i",completename,Search[i].Title,Initial.day,Initial.month,Initial.year,price); 
+    fclose(online);
     	puts("What do you want to do now?");
     	printf("(1) Search for another movie. \n(2) Go back to Main Menu. \n");
     	puts("");
@@ -396,7 +405,7 @@ if (enter == 1){
     int ent=0;
     found=0;
     while (!feof(dvd) && (found !=1)){
-    	    fscanf(dvd," %[^\t]s",&imovie);
+    	    fscanf(dvd," %[^\t]s",imovie);
 			fscanf(dvd,"%i",&iday);
 			fscanf(dvd,"%i",&imonth);
 			fscanf(dvd,"%i",&iyear);
@@ -487,7 +496,7 @@ if (enter == 1){
 }
   else if(ent==1){
   		puts("");
-	puts("The movie is not avaliable in that period. Please, search again.");
+	printf("There is not avaliable DVD for the movie %s according to the specified dates. Please, search again.\n",Search[i].Title);
 	puts("");
 	puts("-------------------------------------------------------------------------------");
 	puts("");
@@ -506,4 +515,49 @@ else if(enter == 0){
 }
 /*End of the function to rent a DVD movie*/
 
+/*Function to show the movies rented by a client*/
+void ShowOnlineMoviesRentedByClient(){
+	char cname[100];
+	char ccname[100];
+	char movie[100];
+	struct Date Initial;
+	int price,answer;
+	puts("-----------------------------ONLINE MOVIES RENTED BY CLIENTS---------------------------------");
+	puts("");
+	puts("Introduce Client´s name:");
+	scanf(" %[^\n]s",cname);
+	printf("List of movies rented by %s is:\n",cname);
+	puts("MOVIE TITLE\tSTART DATE\tTOTAL PRICE");
+	//Search
+    FILE *online;
+    online=fopen("onlinerent.txt","r");
+    while (!feof(online)){
+    	    fscanf(online," %[^\t]s",ccname);
+    	    fscanf(online," %[^\t]s",movie);
+			fscanf(online,"%i",&Initial.day);
+			fscanf(online,"%i",&Initial.month);
+			fscanf(online,"%i",&Initial.year);
+			fscanf(online,"%i",&price);
+    	    if (strcmp(ccname,cname) == 0){
+    	    	printf("%s\t%02i/%02i/%i\t%i $ \n",movie,Initial.day,Initial.month,Initial.year,price);
+    }
+}
+    fclose(online);
+    puts("------------------------------------------------------------------------------------------------");
+    puts("");
+    puts("What do you want to do now?");
+    	printf(" (1) Search for another client \n(2) Go back to Main Menu. \n");
+    	puts("");
+    	puts("Select one option (1 or 2):");
+    	scanf("%i",&answer);
+    	if (answer == 1){
+    		puts("");
+    	    ShowOnlineMoviesRentedByClient();
+    	}else if (answer == 2){
+    		puts("");
+    	    MainMenu();
+    	}	
+    //End of the search
+}
+/*End of the function ShowOnlineMoviesRentedByClient()*/
 
