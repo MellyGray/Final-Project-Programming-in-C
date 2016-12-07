@@ -20,7 +20,6 @@ day and there is not maximum limit of days).*/
 
 #include "functions.h" //Library with the functions
 
-void main (){
-	Introduction(); //Function to log in or register. It directs to EXIT() or MainMenu().
-		
+int main(int argc, char *argv[]){
+	Introduction();
 }

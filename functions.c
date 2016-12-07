@@ -101,17 +101,47 @@ void SaveClients(){
      puts(""); 
      printf("Create ID:");
      scanf("%s",user.id);
-     puts("");
-   puts("Now, introduce your birthday:"); 
-   printf("Day:");
-   scanf("%i", &user.Birthdate.day);
-     printf("Month:");
-   scanf("%i", &user.Birthdate.month);
-     printf("Year:");
-   scanf("%i", &user.Birthdate.year);
-   //Age filter.
+   	/* Check birthdate */   
+	   int dayOk, monthOk, yearOk, dateOk;	
+   	do {
+   		puts("");
+        puts("Introduce your birthday (dd mm yyyy):");
+         puts("");
+         scanf("%i %i %i", &user.Birthdate.day,&user.Birthdate.month,&user.Birthdate.year);
+         puts("");
+   		yearOk = (user.Birthdate.year<=1999);
+		monthOk = (user.Birthdate.month >= 1) && (user.Birthdate.month <= 12);
+   			
+   		switch(user.Birthdate.month) {
+   			case 1:
+   			case 3:
+   			case 5:
+   			case 7:
+   			case 8:
+   			case 10:
+   			case 12:
+   				dayOk = (user.Birthdate.day >= 1) && (user.Birthdate.day <= 31);   					
+   				break;
+   			case 4:
+   			case 6:
+   			case 9:
+   			case 11:
+   				dayOk = (user.Birthdate.day >= 1) && (user.Birthdate.day <= 30);
+				break;   					
+   			case 2:
+   				dayOk = (user.Birthdate.day >= 1) && (user.Birthdate.day <= 28);   					
+   				break;   			
+   			default:
+   				dayOk = 0;
+   				break;
+   		}
+   		dateOk = yearOk && monthOk && dayOk;
+   		if(!dateOk) 		
+   			printf("%02i/%02i/%i is not a valid date.  \n\n", user.Birthdate.day, user.Birthdate.month, user.Birthdate.year);			    				
+   	} while( !dateOk );
+   	//Now save all the data in the text file
    fi=fopen("input.txt","a"); //Open text file input.txt and write at the end
-   fprintf (fi, "\n %s	%s %i %i %i", user.name,user.id, user.Birthdate.day, user.Birthdate.month, user.Birthdate.year);
+   fprintf (fi, "\n %s\t%s %02i %02i %4i", user.name,user.id, user.Birthdate.day, user.Birthdate.month, user.Birthdate.year);
    fclose(fi);
    puts("");
    puts("Register completed successfuly.!!!");
@@ -161,8 +191,8 @@ void MainMenu(){
 		case 6://Call the function ShowOnlineMoviesRentByClient();
 		  // ShowOnlineMoviesRentByClient();
 		   break;
-		case 7://Call the function EXIT();
-		   //EXIT();
+		case 7://Call the function exit();
+		   exit(EXIT_SUCCESS);
 		   break;
 		default: puts("The option does not exists. Please, select a valid option.");
 			
@@ -227,11 +257,11 @@ if (enter == 1){
     puts("");
     puts("Now add a credit card.");
     puts("");
-    puts("Introduce card number:");
-    scanf("%i",&cardnumber);
+   puts("Introduce card number:");
+    scanf("%12i",&cardnumber);
     puts("");
-    puts("Introduce expiration date (d m y):");
-    scanf("%i %i %i",&day,&month,&year);
+    puts("Introduce expiration date (mm yyyy):");
+    scanf("%02i %4i",&month,&year);
     puts("");
     printf("Great! Successful payment. Now you can watch %s for 24h. Enjoy! \n",Search[i].Title);
     puts("");
@@ -321,18 +351,70 @@ while((found==0) && (i<NUMBER_OF_MOVIES)){
 }
 
 if (enter == 1){
-	FILE *mp;
+	   int dayOk, monthOk, yearOk, dateOk;	
+   	do {
+   		printf("To rent %s introduce start date (dd mm yyyy):\n",Search[i].Title);
+        scanf("%i %i %i",&Initial.day,&Initial.month,&Initial.year);
+   		yearOk  = (Initial.year>=2016);
+		monthOk = (Initial.month >= 1) && (Initial.month <= 12);
+   			
+   		switch(Initial.month) {
+   			case 1:
+   			case 3:
+   			case 5:
+   			case 7:
+   			case 8:
+   			case 10:
+   			case 12:
+   				dayOk = (Initial.day >= 1) && (Initial.day <= 31);   					
+   				break;
+   			case 4:
+   			case 6:
+   			case 9:
+   			case 11:
+   				dayOk = (Initial.day >= 1) && (Initial.day <= 30);
+				break;   					
+   			case 2:
+   				dayOk = (Initial.day >= 1) && (Initial.day <= 28);   					
+   				break;   			
+   			default:
+   				dayOk = 0;
+   				break;
+   		}
+   		dateOk = yearOk && monthOk && dayOk;
+   		if(!dateOk) 		
+   			printf("%02i/%02i/%4i is not a valid date.  \n\n", Initial.day, Initial.month, Initial.year);			    				
+   	} while( !dateOk );
+    puts("How many days would you like to rent it?");
+    scanf("%i",&period);
+    Finalday=Initial.day+period;
+    //Check the avaliabilitiy
+      FILE *dvd;
+    dvd=fopen("dvdrent.txt","r");
+    int iday,imonth,iyear;
+    char imovie[100];
+    int ent=0;
+    found=0;
+    while (!feof(dvd) && (found !=1)){
+    	    fscanf(dvd," %[^\t]s",&imovie);
+			fscanf(dvd,"%i",&iday);
+			fscanf(dvd,"%i",&imonth);
+			fscanf(dvd,"%i",&iyear);
+    	    if ((strcmp(imovie,Search[i].Title) == 0)&&(iday==Initial.day && imonth==Initial.month && iyear==Initial.year )){
+    	    	ent=1;
+    	    	found=1;
+    }
+}
+    fclose(dvd);
+    //End of the check
+    if (ent==0){
+    FILE *mp;
 	mp = fopen("mprice.txt", "r"); //Open the file with the movie prices.
 	//Search for the price of the selected movie
 	for (j=0; j<=location; j++){
         fscanf(mp, " %i",&price);
     }
-    fclose(mp);
-    printf("To rent %s introduce start date:\n",Search[i].Title);
-    scanf("%i %i %i",&Initial.day,&Initial.month,&Initial.year);
-    puts("How many days would you like to rent it?");
-    scanf("%i",&period);
-    Finalday=Initial.day+period;
+    fclose(mp); 
     price=price*period;
 	printf("The total price for %s movie is: %i $.\n",Search[i].Title,price);
 	puts("");
@@ -348,22 +430,30 @@ if (enter == 1){
     puts("Now add a credit card.");
     puts("");
     puts("Introduce card number:");
-    scanf("%i",&cardnumber);
+    scanf("%12i",&cardnumber);
     puts("");
-    puts("Introduce expiration date (d m y):");
-    scanf("%i %i %i",&day,&month,&year);
+    puts("Introduce expiration date (m y):");
+    scanf("%2i %4i",&month,&year);
     puts("");
-    printf("Great! Successful payment. Please, get the DVD movie. You have to return %s next %i/%i/%i. Enjoy! \n",Search[i].Title,Finalday,Initial.month,Initial.year);
+    printf("Great! Successful payment. Please, get the DVD movie. You have to return %s next %02i/%02i/%04i. Enjoy! \n",Search[i].Title,Finalday,Initial.month,Initial.year);
        puts("");
     puts("------------------------------------------------------------------------------------------------------");
     puts("Thank you for using our www.moviesclubagency.net! :D ");
     puts("");
     printf("Movie:              %s \n",Search[i].Title);
-    printf("Rental start date:  %i/%i/%i \n",Initial.day,Initial.month,Initial.year);
-    printf("Rental end time:    %i/%i/%i \n",Finalday,Initial.month,Initial.year);
+    printf("Rental start date:  %02i/%02i/%04i \n",Initial.day,Initial.month,Initial.year);
+    printf("Rental end time:    %02i/%02i/%04i \n",Finalday,Initial.month,Initial.year);
     printf("Total price:        %i $ \n",price);
     puts("");
     puts("------------------------------------------------------------------------------------------------------");
+    puts("");
+    /*Save the rent in dvdrent.txt*/
+    dvd=fopen("dvdrent.txt","a");
+    int iiday;
+    for (iiday=Initial.day; iiday<Finalday; iiday++){
+        fprintf(dvd,"\n%s\t%02i %02i %4i",Search[i].Title,iiday,Initial.month,Initial.year);
+    }    
+    fclose(dvd);
     puts("");
     	puts("What do you want to do now?");
     	printf("(1) Search for another movie. \n(2) Go back to Main Menu. \n");
@@ -372,7 +462,7 @@ if (enter == 1){
     	scanf("%i",&answer);
     	if (answer == 1){
     		puts("");
-    	    WatchOnlineMovies();
+    	    RentaDVDMovie();
     	}else if (answer == 2){
     		puts("");
     	    MainMenu();
@@ -388,30 +478,32 @@ if (enter == 1){
     	scanf("%i",&answer);
     	if (answer == 1){
     		puts("");
-    	    WatchOnlineMovies();
+    	    RentaDVDMovie();
     	}else if (answer == 2){
     		puts("");
     	    MainMenu();
     	}	
     }
-    
-    
-}else if(enter == 0){
+}
+  else if(ent==1){
+  		puts("");
+	puts("The movie is not avaliable in that period. Please, search again.");
+	puts("");
+	puts("-------------------------------------------------------------------------------");
+	puts("");
+	RentaDVDMovie();
+  }  
+}
+else if(enter == 0){
 	puts("");
 	puts("The movie does not exist. Please, search again.");
 	puts("");
 	puts("-------------------------------------------------------------------------------");
 	puts("");
-	WatchOnlineMovies();
+	RentaDVDMovie();
 }	
 	
 }
 /*End of the function to rent a DVD movie*/
 
-/*Function to exit the application*/
-int EXIT(){
-	
-}
-
-/*End of the EXIT function*/
 

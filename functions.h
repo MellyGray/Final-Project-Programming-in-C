@@ -49,8 +49,4 @@ void ShowOnlineMoviesRentedByClient();
 /*
 After introducing the client’s name, the application shows a list of the movies that have been rented by him/her.*/
 
-void EXIT();
-
-/*End the execution of the program*/
-
 /*--------------------------------------------------------------------------------------------*/
