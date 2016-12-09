@@ -35,4 +35,20 @@ struct Movies {
 	int price;
 };
 
+//Structure for ShowDVDRentals
+
+struct FilmD{
+	char title [100];
+	char name[100];
+	struct Date start;
+	struct Date end;
+	int price;
+};
+
+struct Film{
+	char title [100];
+	char name[100];
+	struct Date date;
+	int price;
+};
 /*----------------------------------------------------------------------------------------------------------------*/
