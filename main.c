@@ -1,6 +1,6 @@
 /*
 Program: Movies Club Agency
-Developers: Melina Hernandez Velasquez, Daniel Pampano, Eduardo Ulloa Villar 
+Developers: Melina Hernandez Velasquez, Eduardo Ulloa Villar.
             UC3M 1º Industrial electronics and automation engineering
             Curse: Programming in C
 Program description:

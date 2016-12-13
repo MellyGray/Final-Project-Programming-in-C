@@ -1,0 +1,12 @@
+star wars 1	Chris Columbus	2017	luke skywalker	tururururururru	
+harry potter 1	Chris Columbus	2001	Daniel Radcliffe	Harry Potter is selected to enter in Hoghwarts where will discover the magic.	
+harry potter 2	Chris Columbus	2002	Daniel Radcliffe	Harry Potter will have to investigate some rare events in Hoghwarts	
+harry potter 3	Alfonso Cuarón	2004	Daniel Radcliffe	In this new film Harry Potter fels that someone is stalking him.	
+harry potter 4	Mike Newell	2005	Daniel Radcliffe	Harry Potter will have to compete in the Triwizard Tournament.	
+harry potter 5	David Yates	2007	Daniel Radcliffe	Voldemort returns and Harry try to escape from the Voldemort´s influence.	
+harry potter 6	David Yates	2009	Daniel Radcliffe	Lord Voldemort and his Death Eaters are increasing their terror upon the Wizarding and Muggle worlds.	 
+harry potter 7.1	David Yates	2010	Daniel Radcliffe	Harry, Ron, and Hermione are entrusted with a quest to find and destroy Voldemort's Horcruxes.			
+harry potter 7.2	David Yates	2011	Daniel Radcliffe	Harry, Ron and Hermione continue to seek the other Horcruxes in an attempt to destroy Voldemort		
+Locke	Steven Knight	2013	Tom Hardy	A construction foreman Ivan Locke will ha to fix his life with 36 phone calls over the course of the two-hour drive		 			
+	
+

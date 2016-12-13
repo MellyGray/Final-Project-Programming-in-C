@@ -1,3 +1,6 @@
 star wars 1	Eduardunus	11 10 2016 4
 harry potter 1	Melina Gray	11 3 2000 7
 star wars 1	Melina Gray	10 10 2016 6
+
+star wars 1	Melina Happy	15 6 2018 10
+harry potter 3	Pepito Antonio De la Rosa Jacinto Guitierrez Carapolla	13 12 2016 7

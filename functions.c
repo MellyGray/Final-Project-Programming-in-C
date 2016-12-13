@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define size 100
 #define NUMBER_OF_MOVIES 10 //Max number of movies
 #include "functions.h" //Library with the functions declaration
 #include "structs_descript.h" //Library with the structures
@@ -191,7 +192,7 @@ void MainMenu(){
 		   ShowDVDRentals();
 		   break;
 		case 5://Call the function ShowDVDAvailability();
-		   //ShowDVDAvailability();
+		   ShowDVDAvailability();
 		   break;
 		case 6://Call the function ShowOnlineMoviesRentByClient();
 		  ShowOnlineMoviesRentedByClient();
@@ -214,6 +215,7 @@ void WatchOnlineMovies(){
 	int found,enter,i,j,cardnumber,answer,price,day,month,year;
 	int location; //Variable for the position of the movie in the text file in order to find its price.
 	struct Date Initial;
+	char movie[100];
 	char search[100]; //Variable of the title introduced by the title to search on the database.
 	FILE *mT; // Open file with the movie titles
 	mT = fopen("mtitle.txt", "r"); //In mtitle.txt we have all the initial data with the movie titles
@@ -225,7 +227,17 @@ void WatchOnlineMovies(){
 	fclose(mT);
 	puts("----------------------------------WATCH ONLINE MOVIES------------------------------------------------");
 	puts("");
-	puts("To search for a movie, please, introduce the title:");
+	puts("Welcome to Movies Club Agency. This is our catalog:");
+	puts("");
+	FILE *fi;
+	fi=fopen("mtitle.txt","r");
+	for(i=0;i<NUMBER_OF_MOVIES;i++){
+	fscanf(fi," %[^\n]s",movie);
+	printf("%s\n",movie);
+}
+fclose(fi);
+puts("");
+	puts("To watch a movie, please, introduce the title:");
 	scanf(" %[^\n]s",search);
 	puts("");
 	found=0;
@@ -468,10 +480,11 @@ void ShowOnlineRentals(){
 
 /*--------------------------------Function to rent a DVD movie------------------------------------*/
 void RentaDVDMovie(){
-	int found,enter,i,j,cardnumber,answer,price,day,month,year;
+	int found,enter,i,j,cardnumber,answer,price,day,month,year,period;
 	int location; //Variable for the position of the movie in the text file in order to find its price.
 	struct Date Initial;
-	struct Date Final;
+	int Finalday;
+	char movie[100];
 	char search[100];
 	char completename[100]; //Variable of the title introduced by the title to search on the database.
 	FILE *mT; // Open file with the movie titles
@@ -483,6 +496,16 @@ void RentaDVDMovie(){
 	}   
 	fclose(mT);
 	puts("----------------------------------RENT A DVD MOVIE---------------------------------------------------");
+		puts("");
+	puts("Welcome to Movies Club Agency. This is our catalog:");
+	puts("");
+	FILE *fi;
+	fi=fopen("mtitle.txt","r");
+	for(i=0;i<NUMBER_OF_MOVIES;i++){
+	fscanf(fi," %[^\n]s",movie);
+	printf("%s\n",movie);
+}
+fclose(fi);
 	puts("");
 	puts("To search for a movie, introduce the title:");
 	scanf(" %[^\n]s",search);
@@ -536,38 +559,9 @@ if (enter == 1){
    		if(!dateOk) 		
    			printf("%02i/%02i/%4i is not a valid date.  \n\n", Initial.day, Initial.month, Initial.year);			    				
    	} while( !dateOk );
-   	  	do {
-   		printf("Introduce final date (d m y):\n");
-        scanf("%i %i %i",&Final.day,&Final.month,&Final.year);
-   		yearOk  = (Final.year>=2016);
-		monthOk = (Final.month >= 1) && (Final.month <= 12);	
-   		switch(Final.month) {
-   			case 1:
-   			case 3:
-   			case 5:
-   			case 7:
-   			case 8:
-   			case 10:
-   			case 12:
-   				dayOk = (Final.day >= 1) && (Final.day <= 31);   					
-   				break;
-   			case 4:
-   			case 6:
-   			case 9:
-   			case 11:
-   				dayOk = (Final.day >= 1) && (Final.day <= 30);
-				break;   					
-   			case 2:
-   				dayOk = (Final.day >= 1) && (Final.day <= 28);   					
-   				break;   			
-   			default:
-   				dayOk = 0;
-   				break;
-   		}
-   		dateOk = yearOk && monthOk && dayOk;
-   		if(!dateOk) 		
-   			printf("%02i/%02i/%i is not a valid date.  \n\n", Final.day, Final.month, Final.year);			    				
-   	} while( !dateOk );
+   	  puts("How many days would you like to rent it?");
+   	  scanf("%i",&period);
+   	  Finalday=Initial.day+period;
     //Check the avaliabilitiy
       FILE *dvd;
     dvd=fopen("dvdrent.txt","r");
@@ -575,16 +569,20 @@ if (enter == 1){
     char imovie[100];
     int ent=0;
     found=0;
+    int j;
     while (!feof(dvd) && (found !=1)){
     	    fscanf(dvd," %[^\t]s",imovie);
 			fscanf(dvd,"%i",&iday);
 			fscanf(dvd,"%i",&imonth);
 			fscanf(dvd,"%i",&iyear);
-    	    if ((strcmp(imovie,Search[i].Title) == 0)&&(iday==Initial.day && imonth==Initial.month && iyear==Initial.year )|| (strcmp(imovie,Search[i].Title) == 0)&&(iday==Final.day && imonth==Final.month && iyear==Final.year )){
-    	    	ent=1;
+			for (j=Initial.day;j<Finalday;j++){
+    	    if ((strcmp(imovie,Search[i].Title)==0)&&(iday==Initial.day)&&(imonth==Initial.month)&&(iyear==Initial.year)){
     	    	found=1;
+    	    	ent=1;
+				}
+				}
     }
-}
+
     fclose(dvd);
     //End of the check
     if (ent==0){
@@ -595,8 +593,6 @@ if (enter == 1){
         fscanf(mp, " %i",&price);
     }
     fclose(mp); 
-    int period;
-    period=Final.day-Initial.day;
     price=price*period;
 	printf("The total price for %s movie is: %i $.\n",Search[i].Title,price);
 	puts("");
@@ -630,14 +626,14 @@ if (enter == 1){
    		
    	} while( !dateOk );
     puts("");
-    printf("Great! Successful payment. Please, get the DVD movie. You have to return %s next %02i/%02i/%04i. Enjoy! \n",Search[i].Title,Final.day,Final.month,Final.year);
+    printf("Great! Successful payment. Please, get the DVD movie. You have to return %s next %02i/%02i/%04i. Enjoy! \n",Search[i].Title,Finalday,Initial.month,Initial.year);
        puts("");
    puts("-----------------------------------------------------------------------------------------------------");
     puts("Thank you for using our www.moviesclubagency.net! :D ");
     puts("");
     printf("Movie:              %s \n",Search[i].Title);
     printf("Rental start date:  %02i/%02i/%i \n",Initial.day,Initial.month,Initial.year);
-    printf("Rental end time:    %02i/%02i/%i \n",Final.day,Final.month,Final.year);
+    printf("Rental end time:    %02i/%02i/%i \n",Finalday,Initial.month,Initial.year);
     printf("Total price:        %i $ \n",price);
     puts("");
     puts("-----------------------------------------------------------------------------------------------------");
@@ -645,13 +641,13 @@ if (enter == 1){
     /*Save the rent in dvdrent.txt*/
     dvd=fopen("dvdrent.txt","a");
     int iiday;
-    for (iiday=Initial.day; iiday<=Final.day; iiday++){
-        fprintf(dvd,"\n%s\t%02i %02i %4i",Search[i].Title,iiday,Initial.month,Initial.year);
+    for (iiday=Initial.day; iiday<=Finalday; iiday++){
+        fprintf(dvd,"\n%s\t%i %i %i",Search[i].Title,iiday,Initial.month,Initial.year);
     }    
     fclose(dvd);
      /*Save the rent in ShowDVDRentals.txt*/
     dvd=fopen("ShowDVDRentals.txt","a");
-        fprintf(dvd,"\n%s\t%s\t%i %i %i %i %i %i %i",Search[i].Title,completename,Initial.day,Initial.month,Initial.year,Final.day,Final.month,Final.year,price); //////////////////////////////////////
+        fprintf(dvd,"\n%s\t%s\t%i %i %i %i %i %i %i",Search[i].Title,completename,Initial.day,Initial.month,Initial.year,Finalday,Initial.month,Initial.year,price); //////////////////////////////////////
     fclose(dvd);
     puts("");
     	puts("What do you want to do now?");
@@ -792,6 +788,173 @@ void ShowDVDRentals(){
     	}	
 }
 /*-------------------------------End of fucntion Show DVD rentals---------------------------------*/
+
+/*------------------------------Function to show DVD avaliability---------------------------------*/
+void ShowDVDAvailability(){
+	char imovie [100];
+	char fsearch [100];
+	char actor [100];
+	char director [100];
+	char description [256];
+	int day,month,year;
+	int cday, cmonth, cyear;
+	int iday,imonth,iyear;
+	int period;
+	int d;
+	int e, r;
+	int i;
+	int t;
+	int s,h1,h2,h3,h4,h5,h6,h7,h72,l;
+	s=0;
+	h1=0;
+	h2=0;
+	h3=0;
+	h4=0;
+	h5=0;
+	h6=0;
+	h7=0;
+	h72=0;
+	l=0;
+	char name [10][100];
+	i=0;
+	
+	puts("----------------------------------DVD Availability---------------------------------------------------");
+	 int dayOk, monthOk, yearOk, dateOk;	
+   	do {
+   		printf("Introduce start date (d m y):\n");
+        scanf("%i %i %i",&day,&month,&year);
+   		yearOk  = (year>=2016);
+		monthOk = (month >= 1) && (month <= 12);
+   			
+   		switch(month) {
+   			case 1:
+   			case 3:
+   			case 5:
+   			case 7:
+   			case 8:
+   			case 10:
+   			case 12:
+   				dayOk = (day >= 1) && (day <= 31);   					
+   				break;
+   			case 4:
+   			case 6:
+   			case 9:
+   			case 11:
+   				dayOk = (day >= 1) && (day <= 30);
+				break;   					
+   			case 2:
+   				dayOk = (day >= 1) && (day <= 28);   					
+   				break;   			
+   			default:
+   				dayOk = 0;
+   				break;
+   		}
+   		dateOk = yearOk && monthOk && dayOk;
+   		if(!dateOk) 		
+   			printf("%02i/%02i/%4i is not a valid date.  \n\n", day, month, year);			    				
+   	} while( !dateOk );
+	puts("Introduce how many days");
+	scanf(" %i", &period);         
+	t=day+period;
+	cday=day;
+	cmonth=month;
+	cyear=year;
+	
+	
+	FILE *dvd;
+    dvd=fopen("dvdrent.txt","r");
+	
+	while (!feof(dvd)){
+		    strcpy(name[i], "fault");
+    	    fscanf(dvd," %[^\t]s",imovie);
+			fscanf(dvd,"%i",&iday);
+			fscanf(dvd,"%i",&imonth);
+			fscanf(dvd,"%i",&iyear);
+			day=cday;
+			month=cmonth;
+			year=cyear;
+			for(d=day; d<=t; d++){
+    	    if (iday==day && imonth==month && iyear==year ){
+    	    	if( strcmp(imovie,"star wars 1")==0 && s==0){
+    	    		strcpy(name[i], imovie);
+    	    		s=1;}
+    	        if( strcmp(imovie,"harry potter 1")==0 && h1==0){
+    	    		strcpy(name[i], imovie);
+    	    		h1=1;}
+    	    	if( strcmp(imovie,"harry potter 2")==0 && h2==0){
+    	    		strcpy(name[i], imovie);
+    	    		h2=1;}
+    	         if( strcmp(imovie,"harry potter 3")==0 && h3==0){
+    	    		strcpy(name[i], imovie);
+    	    		h3=1;}
+    	    	if( strcmp(imovie,"harry potter 4")==0 && h4==0){
+    	    	strcpy(name[i], imovie);
+    	    		h4=1;
+    	    		}
+				if( strcmp(imovie,"harry potter 5")==0 && h5==0){
+    	    		strcpy(name[i], imovie);
+    	    		h5=1;
+    	    		}
+				if( strcmp(imovie,"harry potter 6")==0 && h6==0){
+    	    		strcpy(name[i], imovie);
+    	    		h6=1;
+    	    		}
+				if( strcmp(imovie,"harry potter 7.1")==0 && h7==0){
+    	    		strcpy(name[i], imovie);
+    	    		h7=1;
+    	    		}
+				if( strcmp(imovie,"harry potter 7.2")==0 && h72==0){
+    	    	strcpy(name[i], imovie);
+    	    		h72=1;
+    	    		}
+				if( strcmp(imovie,"Locke")==0 && l==0){
+    	    		strcpy(name[i], imovie);
+    	    		l=1;
+    	    	}
+}
+}
+i++;
+}
+e=i;
+
+for(i=e; i<10; i++){
+	strcpy(name[i], "fault");
+	
+}
+puts("\tMOVIE TITLE\tDIRECTOR\tYEAR\tACTOR\tDESCRIPTION\n");
+fclose(dvd);
+FILE *inf;
+inf=fopen("inf.txt", "r");
+	s=0;
+i=0;
+	while (!feof(inf)){
+		i=0;
+    	    fscanf(inf," %[^\t]s", fsearch);
+			fscanf(inf," %[^\t]s", director);
+			fscanf(inf,"%i",&year);
+			fscanf(inf," %[^\t]s", actor);
+			fscanf(inf," %[^\t]s", description);
+			
+			for(i=0; i<NUMBER_OF_MOVIES ; i++){  //
+    	    		if(strcmp(fsearch,name[i])==0){
+					s=1;
+				}
+			}
+				if(s==0){
+					printf(" %s\t%s\t%i\t%s\t%s\n", fsearch, director, year, actor, description);
+					puts("");
+					puts("");
+				}
+				s=0;
+    	    		
+    	   
+    
+}
+ puts("-----------------------------------------------------------------------------------------------------");
+fclose(inf);
+}
+
+/*-------------------------------End of the DVD avaliability function-----------------------------*/
 
 /*---------------------------Function to show the movies rented by a client-----------------------*/
 void ShowOnlineMoviesRentedByClient(){
